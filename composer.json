@@ -1,0 +1,30 @@
+{
+    "name": "antriver/omnipay-rms",
+    "description": "Omnipay driver for Retail Merchant Services (RMS)",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "purchase",
+        "rms",
+        "retail merchant services"
+    ],
+    "homepage": "https://github.com/antriver/omnipay-rms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthony Kuske",
+            "homepage": "http://www.anthonykuske.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\RetailMerchantServices\\": "src/"
+        }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    }
+}
