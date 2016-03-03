@@ -29,34 +29,29 @@ class HostedGateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'callbackUrl' => '',
+            'notifyUrl' => '',
+            'countryCode' => 'GB',
             'merchantId' => '',
             'signatureKey' => '',
         );
     }
 
     /**
-     * Get the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getCallbackUrl()
+    public function getCountryCode()
     {
-        return $this->getParameter('callbackUrl');
+        return $this->getParameter('countryCode');
     }
 
     /**
-     * Set the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
-    public function setCallbackUrl($value)
+    public function setCountryCode($value)
     {
-        return $this->setParameter('callbackUrl', $value);
+        return $this->setParameter('countryCode', $value);
     }
 
     /**
@@ -78,6 +73,27 @@ class HostedGateway extends AbstractGateway
     }
 
     /**
+     * Get the request notify URL.
+     *
+     * @return string
+     */
+    public function getNotifyUrl()
+    {
+        return $this->getParameter('notifyUrl');
+    }
+
+    /**
+     * Sets the request notify URL.
+     *
+     * @param string $value
+     * @return AbstractRequest Provides a fluent interface
+     */
+    public function setNotifyUrl($value)
+    {
+        return $this->setParameter('notifyUrl', $value);
+    }
+
+    /**
      * @return mixed
      */
     public function getSignatureKey()
@@ -93,42 +109,6 @@ class HostedGateway extends AbstractGateway
     public function setSignatureKey($value)
     {
         return $this->setParameter('signatureKey', $value);
-    }
-
-    /**
-     * Authorize an amount on the customer's card.
-     *
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function authorize(array $options = array())
-    {
-
-    }
-
-    /**
-     * Handle return from off-site gateways after authorization.
-     *
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function completeAuthorize(array $options = array())
-    {
-
-    }
-
-    /**
-     * Capture an amount you have previously authorized.
-     *
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function capture(array $options = array())
-    {
-
     }
 
     /**
@@ -152,31 +132,7 @@ class HostedGateway extends AbstractGateway
      */
     public function completePurchase(array $options = array())
     {
-
-    }
-
-    /**
-     * Refund an already processed transaction.
-     *
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function refund(array $options = array())
-    {
-
-    }
-
-    /**
-     * Generally can only be called up to 24 hours after submitting a transaction.
-     *
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function void(array $options = array())
-    {
-
+        return $this->createRequest(self::MESSAGE_NAMESPACE.'CompletePurchaseRequest', $options);
     }
 
     /**
@@ -187,33 +143,4 @@ class HostedGateway extends AbstractGateway
 
     }
 
-    /**
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function createCard(array $options = array())
-    {
-        throw new BadMethodCallException;
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function updateCard(array $options = array())
-    {
-        throw new BadMethodCallException;
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return ResponseInterface|void
-     */
-    public function deleteCard(array $options = array())
-    {
-        throw new BadMethodCallException;
-    }
 }

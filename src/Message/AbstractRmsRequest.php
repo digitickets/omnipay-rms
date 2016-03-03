@@ -12,27 +12,21 @@ use Omnipay\Common\Message\AbstractRequest;
 abstract class AbstractRmsRequest extends AbstractRequest
 {
     /**
-     * Get the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getCallbackUrl()
+    public function getCountryCode()
     {
-        return $this->getParameter('callbackUrl');
+        return $this->getParameter('countryCode');
     }
 
     /**
-     * Set the URL to which the transaction details will be posted after the payment
-     * process is complete.
-     *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
-    public function setCallbackUrl($value)
+    public function setCountryCode($value)
     {
-        return $this->setParameter('callbackUrl', $value);
+        return $this->setParameter('countryCode', $value);
     }
 
     public function getMerchantId()
@@ -63,21 +57,13 @@ abstract class AbstractRmsRequest extends AbstractRequest
 
         $signatureKey = $this->getSignatureKey();
 
-        var_dump($signatureKey);
-
         ksort($data);
-
-        var_dump($data);
 
         $str = http_build_query($data, '', '&');
         $str = str_replace(array('%0D%0A', '%0A%0D', '%0D'), '%0A', $str);
         $str .= $signatureKey;
 
-        var_dump($str);
-
         $signature = hash('SHA512', $str);
-
-        var_dump($signature);
 
         return $signature;
     }

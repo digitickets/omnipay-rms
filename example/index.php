@@ -7,28 +7,27 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 $config = require __DIR__.'/config.php';
 
+die(json_encode($config));
+
 /** @var HostedGateway $gateway */
 $gateway = Omnipay::create('RetailMerchantServices_Hosted');
+$gateway->initialize($config);
 
-$gateway->setCallbackUrl($config['callbackUrl']);
-$gateway->setMerchantId($config['merchantId']);
-$gateway->setSignatureKey($config['signatureKey']);
-
-
-//print_r($gateway);
+print_r($gateway);
 
 // Send purchase request
 $response = $gateway->purchase(
     [
-        'amount' => '1000',
-        'country' => 'GB',
+        'amount' => '10.00',
         'currency' => 'GBP',
-        'redirectUrl' => 'http://www.example.com',
+        'returnUrl' => 'http://www.example.com',
+        'transactionId' => '12345'
     ]
 )->send();
 
 
-//print_r($response);
+print_r($response);
+die();
 
 // Process response
 if ($response->isSuccessful()) {
