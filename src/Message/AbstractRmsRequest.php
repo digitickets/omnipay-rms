@@ -49,7 +49,7 @@ abstract class AbstractRmsRequest extends AbstractRequest
         return $this->setParameter('signatureKey', $value);
     }
 
-    protected function generateSignature($data)
+    public function generateSignature($data)
     {
         if (isset($data['signature'])) {
             unset($data['signature']);
@@ -86,5 +86,13 @@ abstract class AbstractRmsRequest extends AbstractRequest
         $responseClass = substr($requestClass, 0, -7).'Response';
 
         return $this->response = new $responseClass($this, $data);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function getHttpRequest()
+    {
+        return $this->httpRequest;
     }
 }

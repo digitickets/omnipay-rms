@@ -2,10 +2,15 @@
 
 namespace Omnipay\RetailMerchantServices\Message;
 
+/**
+ * Class CompletePurchaseRequest
+ *
+ * @package Omnipay\RetailMerchantServices\Message
+ */
 class CompletePurchaseRequest extends AbstractRmsRequest
 {
     public function getData()
     {
-        //$data = $this->httpRequest->request
+        return $this->parameters->all();
     }
 }

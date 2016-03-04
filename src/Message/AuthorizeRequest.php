@@ -11,6 +11,7 @@ class AuthorizeRequest extends AbstractRmsRequest
 {
     /**
      * Get the data to send to RMS to begin a transaction.
+     * Convert from Omnipay naming to RMS naming.
      *
      * @return array
      */
@@ -18,7 +19,7 @@ class AuthorizeRequest extends AbstractRmsRequest
     {
         $this->validate('amount', 'currency', 'returnUrl');
 
-        $amount = $this->getParameter('amount');
+        $amount = $this->getAmount();
 
         // Convert decimal amount to integer.
         if (stripos($amount, '.') !== false) {
@@ -32,15 +33,9 @@ class AuthorizeRequest extends AbstractRmsRequest
             'callbackURL' => $this->getNotifyUrl(),
             'countryCode' => $this->getCountryCode(),
             'action' => 'SALE',
-
-            'redirectURL' => $this->getParameter('returnUrl'),
-            'currency' => $this->getParameter('currency'),
+            'redirectURL' => $this->getReturnUrl(),
+            'currency' => $this->getCurrency(),
             'amount' => $amount,
-
-            'customerName' => $this->getParameter('cutomerName'),
-            'customerName' => $this->getParameter('cutomerName'),
-
-            //'orderRef' => $this->getDescription()
         ];
 
         if ($transactionId = $this->getTransactionId()) {
@@ -82,15 +77,7 @@ class AuthorizeRequest extends AbstractRmsRequest
             $data['customerEmail'] = $customerEmail;
         }
 
-
         $data['signature'] = $this->generateSignature($data);
-
-        /*echo '<pre>';
-        echo 'CARD';
-        print_r($card);
-        echo 'DATA';
-        print_r($data);
-        die();*/
 
         return $data;
     }

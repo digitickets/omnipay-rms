@@ -3,7 +3,6 @@
 namespace Omnipay\RetailMerchantServices;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Common\Exception\BadMethodCallException;
 use Omnipay\Common\Message\ResponseInterface;
 
 /**
@@ -86,7 +85,8 @@ class HostedGateway extends AbstractGateway
      * Sets the request notify URL.
      *
      * @param string $value
-     * @return AbstractRequest Provides a fluent interface
+     *
+     * @return $this
      */
     public function setNotifyUrl($value)
     {
@@ -134,13 +134,4 @@ class HostedGateway extends AbstractGateway
     {
         return $this->createRequest(self::MESSAGE_NAMESPACE.'CompletePurchaseRequest', $options);
     }
-
-    /**
-     * Convert an incoming request from an off-site gateway to a generic notification object for further processing.
-     */
-    public function acceptNotification()
-    {
-
-    }
-
 }

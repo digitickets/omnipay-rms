@@ -7,13 +7,9 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 $config = require __DIR__.'/config.php';
 
-die(json_encode($config));
-
 /** @var HostedGateway $gateway */
 $gateway = Omnipay::create('RetailMerchantServices_Hosted');
 $gateway->initialize($config);
-
-print_r($gateway);
 
 // Send purchase request
 $response = $gateway->purchase(
@@ -24,10 +20,6 @@ $response = $gateway->purchase(
         'transactionId' => '12345'
     ]
 )->send();
-
-
-print_r($response);
-die();
 
 // Process response
 if ($response->isSuccessful()) {
