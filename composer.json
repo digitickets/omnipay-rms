@@ -1,5 +1,5 @@
 {
-    "name": "antriver/omnipay-rms",
+    "name": "digitickets/omnipay-rms",
     "description": "Omnipay driver for Retail Merchant Services (RMS)",
     "keywords": [
         "gateway",
@@ -11,7 +11,7 @@
         "rms",
         "retail merchant services"
     ],
-    "homepage": "https://github.com/antriver/omnipay-rms",
+    "homepage": "https://github.com/digitickets/omnipay-rms",
     "license": "MIT",
     "authors": [
         {
