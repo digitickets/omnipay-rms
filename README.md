@@ -5,5 +5,5 @@
 ## Installation
 
 ```bash
-composer require antriver/omnipay-rms
+composer require digitickets/omnipay-rms
 ```
